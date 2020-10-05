@@ -6,10 +6,17 @@ const feedbackRoute = require('./feedback')
 const router = express.Router()
 
 module.exports = (params) => {
-  router.get('/', (request, response) => {
+
+  const {
+    speakersService
+  } = params
+
+  router.get('/', async (request, response) => {
+    const topSpeakers = await speakersService.getList()
     response.render('layout', {
       pageTitle: 'Welcome',
-      template: 'index'
+      template: 'index',
+      topSpeakers
     })
   })
 
