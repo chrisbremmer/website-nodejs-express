@@ -12,7 +12,11 @@
             <%})%>
           </ul>
         </div>
-        <%}%>
+        <%} else if(locals.successMessage){ %>
+        <div class="alert alert-success">
+          <%= successMessage %>
+        </div>
+        <% } %>
 
         <form class="feedback-form" method="POST" action="/feedback">
           <div class="form-group">
@@ -44,20 +48,20 @@
 
         <div class="feedback-items">
           <% feedback.forEach(function(item){ %>
-        <div class="feedback-item item-list media-list">
-          <div class="feedback-item media">
-            <div class="feedback-info media-body">
-              <div class="feedback-head">
-                <div class="feedback-title"><%=item.title%></div>
-                <small>by <%=item.name%></small>
+          <div class="feedback-item item-list media-list">
+            <div class="feedback-item media">
+              <div class="feedback-info media-body">
+                <div class="feedback-head">
+                  <div class="feedback-title"><%=item.title%></div>
+                  <small>by <%=item.name%></small>
+                </div>
+                <div class="feedback-message"><%=item.message%></div>
               </div>
-              <div class="feedback-message"><%=item.message%></div>
             </div>
           </div>
+          <% }) %>
         </div>
-        <% }) %>
       </div>
-    </div>
     </aside>
   </div>
 </div>
