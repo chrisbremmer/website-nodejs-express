@@ -26,7 +26,10 @@ class SpeakerService {
 
     // We are using map() to transform the array we get into another one
     return data.map(speaker => {
-      return { name: speaker.name, shortname: speaker.shortname };
+      return {
+        name: speaker.name,
+        shortname: speaker.shortname
+      };
     });
   }
 
