@@ -12,11 +12,13 @@ module.exports = (params) => {
   } = params
 
   router.get('/', async (request, response) => {
+    const artwork = await speakersService.getAllArtwork()
     const topSpeakers = await speakersService.getList()
     response.render('layout', {
       pageTitle: 'Welcome',
       template: 'index',
-      topSpeakers
+      topSpeakers,
+      artwork
     })
   })
 
