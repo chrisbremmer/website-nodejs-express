@@ -1,34 +1,32 @@
-const express = require('express')
+const express = require('express');
 
-const speakersRoute = require('./speakers')
-const feedbackRoute = require('./feedback')
+const speakersRoute = require('./speakers');
+const feedbackRoute = require('./feedback');
 
-const router = express.Router()
+const router = express.Router();
 
-module.exports = (params) => {
-
+module.exports = params => {
   const {
     speakersService
-  } = params
+  } = params;
 
   router.get('/', async (request, response, next) => {
     try {
-      const artwork = await speakersService.getAllArtwork()
-      const topSpeakers = await speakersService.getList()
+      const artwork = await speakersService.getAllArtwork();
+      const topSpeakers = await speakersService.getList();
       return response.render('layout', {
         pageTitle: 'Welcome',
         template: 'index',
         topSpeakers,
-        artwork
-      })
+        artwork,
+      });
     } catch (err) {
-      return next(err)
+      return next(err);
     }
+  });
 
-  })
+  router.use('/speakers', speakersRoute(params));
+  router.use('/feedback', feedbackRoute(params));
 
-  router.use('/speakers', speakersRoute(params))
-  router.use('/feedback', feedbackRoute(params))
-
-  return router
-}
+  return router;
+};
